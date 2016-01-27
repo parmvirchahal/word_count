@@ -6,6 +6,7 @@
 
 int main(void)
 {
+
 	int x, y;
 	char c;
 
@@ -40,7 +41,7 @@ int main(void)
 	}
 	else {
 		printf("Unknown operator %c\n", c);
-		printf("%d %c %d is 0\n", x, c, y);
+		return 1;
 	}
 
 	return 0;
