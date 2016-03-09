@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /* ECE1120 - Lab 6 Part 4
  * by Parmvir Chahal
@@ -10,19 +11,34 @@ int string_compare(char *needle, char *haystack);
 int find_string(char *needle, char *haystack);
 
 int main() {
+    int i= 0, z = 0;
+    
     char y[256];
     char x[256];
     
     printf("Please enter the first string:\n");
-    scanf("%s", y);
+    gets(y);
     
     printf("Please enter the string to be found from the first string:\n");
-    scanf("%s", x);
+    gets(x);
     
-    find_string(x, y);
-    string_compare(x, y);
+    i = find_string(x, y);
     
-    return 0;
+    if (i == -1) {
+        printf("The first string does not exist within the second string.\n");
+        
+        return 0;
+    }
+    
+    else {
+        printf("The first string exists within the second string.\n");
+        
+        z = strlen(y) - (i + strlen(x));
+        
+        printf("The difference of these two strings is %i.\n", z);
+        
+        return 0;
+    }
 }
 
 int string_compare(char *needle, char *haystack) {  
@@ -32,12 +48,11 @@ int string_compare(char *needle, char *haystack) {
     }
     
     if (*needle == '\0') {
-        printf("The string '%s' exists within the string '%s'.\n", needle, haystack);
         
         return 0;
     }
+    
     if (*haystack == '\0') {
-        printf("The string '%s' does not exist within the string '%s'.\n", needle, haystack);
         
         return -1;
     }
@@ -46,9 +61,17 @@ int string_compare(char *needle, char *haystack) {
 }
 
 int find_string(char *needle, char *haystack) {
+    int i = 0;
+    
     while(string_compare(needle, haystack) && *haystack != '\0') {
         haystack++;
+        i++;
     }
     
-    return 0;
+    if (*haystack == '\0') {
+        
+        return -1;
+    }
+    
+    return i;
 }
